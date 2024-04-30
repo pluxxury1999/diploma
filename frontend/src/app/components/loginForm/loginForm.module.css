@@ -1,0 +1,65 @@
+.wrapper {
+    width: 100%;
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.form {
+    width: fit-content;
+}
+
+.input {
+    display: block;
+}
+
+.input[type="text"],
+.input[type="password"] {
+    font-size: 20px;
+    width: 300px;
+    height: 40px;
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    outline-color: rgba(78, 187, 115, 0.5);
+}
+
+.input[type="text"]:focus,
+.input[type="password"]:focus {
+    position: relative;
+    box-shadow: 0px 0px 6px rgba(78, 187, 115, 0.7);
+}
+
+.input[type="submit"] {
+    font-size: 20px;
+    width: 300px;
+    height: 40px;
+    margin: 20px 0;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.registerBlock {
+    margin-bottom: 10%;
+}
+
+.registerLink {
+    font-size: 18px;
+    text-decoration: underline;
+    color: var(--primary-color);
+}

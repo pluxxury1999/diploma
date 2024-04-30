@@ -9,7 +9,6 @@ const LoginPage = () => {
             <main>
                 <LoginForm />
             </main>
-            <Footer />
         </>
     );
 };
