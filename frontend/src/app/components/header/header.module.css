@@ -1,0 +1,11 @@
+.header {
+    width: 100%;
+}
+
+.headerWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    padding: 10px 20px;
+}

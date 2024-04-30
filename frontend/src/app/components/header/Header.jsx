@@ -1,12 +1,15 @@
-import logo from "@/../public/logo.png";
+import logo from "@/../public/logo.svg";
+
+import styles from "./header.module.css";
 
 import Image from "next/image";
 
 const Header = () => {
     return (
-        <header>
-            <h1>Header</h1>
-            <Image src={logo} alt="Logo" width={250}/>
+        <header className={styles.header}>
+            <div className={styles.headerWrapper}>
+                <Image src={logo} alt="Logo" height={50}/>
+            </div>
         </header>
     )
 }
