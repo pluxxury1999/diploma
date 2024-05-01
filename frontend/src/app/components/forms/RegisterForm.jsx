@@ -1,16 +1,24 @@
 "use client";
 
-import styles from "./loginForm.module.css";
+import styles from "./forms.module.css";
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const formHandler = (e) => {
         e.preventDefault();
     };
 
     return (
         <section className={styles.wrapper}>
-            <h1 className={styles.title}>Login</h1>
+            <h1 className={styles.title}>Registration</h1>
             <form className={styles.form} onSubmit={formHandler}>
+                <label htmlFor="email">E-mail</label>
+                <input
+                    className={styles.input}
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="E-mail"
+                />
                 <label htmlFor="username">Username</label>
                 <input
                     className={styles.input}
@@ -27,13 +35,17 @@ const LoginForm = () => {
                     id="password"
                     placeholder="Password"
                 />
-                <input className={styles.input} type="submit" value="Login" />
+                <input
+                    className={styles.input}
+                    type="submit"
+                    value="Register now"
+                />
             </form>
             <div className={styles.registerBlock}>
                 <p>
-                    Don't have an account ?{" "}
-                    <a className={styles.registerLink} href="/registration">
-                        Register here
+                Already have an account ?{" "}
+                    <a className={styles.registerLink} href="/login">
+                        Sign in
                     </a>
                 </p>
             </div>
@@ -41,4 +53,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default RegisterForm;
