@@ -63,3 +63,14 @@
     text-decoration: underline;
     color: var(--primary-color);
 }
+
+.successWrapper {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 10%;
+}
+
+.successTitle {
+    font-size: 26px;
+    padding: 5px;
+}
