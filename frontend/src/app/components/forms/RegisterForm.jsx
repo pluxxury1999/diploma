@@ -10,7 +10,7 @@ const RegisterForm = () => {
     const [isUsername, setIsUsername] = useState(null);
     const [isPassword, setIsPassword] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [register, setRegister] = useState(false);
+    const [register, setRegister] = useState(null);
 
     const validateEmail = (email) => {
         const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,13 +19,17 @@ const RegisterForm = () => {
         result ? setIsEmail(email) : setIsEmail(false);
     };
 
-    const validateUsername = (username) => {
-        username.length >= 3 ? setIsUsername(username) : setIsUsername(false);
-    };
+    const lengthValidation = (value, length, setFunc) => {
+        value.length >= length ? setFunc(value) : setFunc(false);
+    }
 
-    const validatePassword = (password) => {
-        password.length >= 3 ? setIsPassword(password) : setIsPassword(false);
-    };
+    // const validateUsername = (username) => {
+    //     username.length >= 3 ? setIsUsername(username) : setIsUsername(false);
+    // };
+
+    // const validatePassword = (password) => {
+    //     password.length >= 3 ? setIsPassword(password) : setIsPassword(false);
+    // };
 
     // Обробник форми
 
@@ -62,11 +66,11 @@ const RegisterForm = () => {
                                 type="text"
                                 name="email"
                                 id="email"
-                                placeholder="E-mail"
+                                placeholder="Example@gmail.com"
                             />
                             <label htmlFor="username">Username</label>
                             <input
-                                onChange={(e) => validateUsername(e.target.value)}
+                                onChange={(e) => lengthValidation(e.target.value, 3, setIsUsername)}
                                 className={styles.input}
                                 style={{
                                     borderColor:
@@ -78,9 +82,10 @@ const RegisterForm = () => {
                                 id="username"
                                 placeholder="Username"
                             />
+                            <p className={styles.description}>min length 3</p>
                             <label htmlFor="password">Password</label>
                             <input
-                                onChange={(e) => validatePassword(e.target.value)}
+                                onChange={(e) => lengthValidation(e.target.value, 8, setIsPassword)}
                                 className={styles.input}
                                 style={{
                                     borderColor:
@@ -92,6 +97,7 @@ const RegisterForm = () => {
                                 id="password"
                                 placeholder="Password"
                             />
+                            <p className={styles.description}>min length 8</p>
                             <input
                                 disabled={!isEmail || !isUsername || !isPassword}
                                 className={styles.input}
