@@ -23,14 +23,6 @@ const RegisterForm = () => {
         value.length >= length ? setFunc(value) : setFunc(false);
     }
 
-    // const validateUsername = (username) => {
-    //     username.length >= 3 ? setIsUsername(username) : setIsUsername(false);
-    // };
-
-    // const validatePassword = (password) => {
-    //     password.length >= 3 ? setIsPassword(password) : setIsPassword(false);
-    // };
-
     // Обробник форми
 
     const formHandler = (

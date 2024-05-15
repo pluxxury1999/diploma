@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "check_jwts",
+  "info": {
+    "singularName": "check-jwt",
+    "pluralName": "check-jwts",
+    "displayName": "checkJWT"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "status": {
+      "type": "string"
+    }
+  }
+}
