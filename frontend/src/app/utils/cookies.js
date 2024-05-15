@@ -4,8 +4,13 @@ const setJwtToCookie = (jwt) => {
 };
 
 const getJwtFromCookie = () => {
-    const jwt = document.cookie.split("=")[1];
-    return jwt;
+    try {
+        const jwt = document.cookie.split('; ').find(cookie => cookie.startsWith('jwt=')).split('=')[1];
+        console.log(jwt);
+        return jwt;
+    } catch (error) {
+        return error.message;
+    }
 };
 
 export { setJwtToCookie, getJwtFromCookie };

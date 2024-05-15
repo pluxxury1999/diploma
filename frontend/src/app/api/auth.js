@@ -35,18 +35,15 @@ const loginUser = async (data) => {
     return response;
 };
 
-const checkUserAccess = async (token) => {
+const checkUserAccess = (token) => {
     const response = axios
         .get(checkJwtUrl, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
-        .catch((error) => {
-            return {
-                status: error.response.status,
-                message: error.message,
-            };
+        .catch(() => {
+            window.location.href = "/login";
         });
     return response;
 };
