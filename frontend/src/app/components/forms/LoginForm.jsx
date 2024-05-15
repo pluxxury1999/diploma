@@ -4,6 +4,7 @@ import styles from "./forms.module.css";
 import { useState } from "react";
 import { loginUser } from "@/app/api/auth";
 import Spinner from "../spinner/Spinner";
+import { setJwtToCookie } from "@/app/utils/cookies";
 
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);
@@ -20,9 +21,12 @@ const LoginForm = () => {
         try {
             loginUser({ identifier, password }).then((res) => {
                 console.log(res.status);
-                res.status === 200
-                    ? console.log("true", res)
-                    : console.log("false", res);
+                if (res.status === 200) {
+                    setJwtToCookie(res.data.jwt);
+                    window.location.href = "/home";
+                } else {
+                    console.log(res.message);
+                }
                 setLoading(false);
             });
         } catch (error) {
