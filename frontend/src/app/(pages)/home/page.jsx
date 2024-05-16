@@ -12,12 +12,17 @@ import Spinner from "@/app/components/spinner/Spinner";
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const router = useRouter();
 
     useEffect(() => {
-        checkUserAccess(getJwtFromCookie()) ? null : router.push("/login");
-        setLoading(false);
+        if (checkUserAccess(getJwtFromCookie())) {
+            setLoggedIn(true);
+            setLoading(false);
+        } else {
+            router.push("/login");
+        }
     }, []);
 
     return (

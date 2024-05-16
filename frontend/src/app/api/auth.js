@@ -19,7 +19,7 @@ const registerUser = async (data) => {
                 message: error.message,
             };
         });
-    return response;
+    return await response;
 };
 
 const loginUser = async (data) => {
@@ -34,21 +34,26 @@ const loginUser = async (data) => {
                 message: error.message,
             };
         });
-    return response;
+    return await response;
 };
 
-const checkUserAccess = (token) => {
-    const response = axios
+const checkUserAccess = async (token) => {
+    await axios
         .get(checkJwtUrl, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
+        .then((res) => {
+            if (res.status === 200) {
+                return true;
+            }
+        })
         .catch(() => {
             deleteCookie();
             window.location.href = "/login";
+            return false;
         });
-    return response;
 };
 
 export { registerUser, loginUser, checkUserAccess };

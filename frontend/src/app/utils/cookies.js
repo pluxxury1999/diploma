@@ -3,14 +3,15 @@ const setJwtToCookie = (jwt) => {
 };
 
 const getJwtFromCookie = () => {
-    
     if (document.cookie.length === 0) {
         return false;
     }
 
     try {
-        const jwt = document.cookie.split('; ').find(cookie => cookie.startsWith('jwt=')).split('=')[1];
-        console.log(jwt);
+        const jwt = document.cookie
+            .split("; ")
+            .find((cookie) => cookie.startsWith("jwt="))
+            .split("=")[1];
         return jwt;
     } catch (error) {
         return error.message;
