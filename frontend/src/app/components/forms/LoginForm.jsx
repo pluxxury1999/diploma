@@ -1,15 +1,24 @@
 "use client";
 
 import styles from "./forms.module.css";
-import { useState } from "react";
-import { loginUser } from "@/app/api/auth";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { loginUser, checkUserAccess } from "@/app/api/auth";
+
+import Link from "next/link";
+import { setJwtToCookie, getJwtFromCookie } from "@/app/utils/cookies";
 import Spinner from "../spinner/Spinner";
-import { setJwtToCookie } from "@/app/utils/cookies";
 
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const [userIdentifier, setUserIdentifier] = useState(null);
     const [userPassword, setUserPassword] = useState(null);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        getJwtFromCookie() ? router.push("/home") : null;
+    }, [])
 
     const formHandler = (
         event,
@@ -23,7 +32,7 @@ const LoginForm = () => {
                 console.log(res.status);
                 if (res.status === 200) {
                     setJwtToCookie(res.data.jwt);
-                    window.location.href = "/home";
+                    router.push("/home");
                 } else {
                     console.log(res.message);
                 }
@@ -69,12 +78,12 @@ const LoginForm = () => {
                     <div className={styles.registerBlock}>
                         <p>
                             Don't have an account ?{" "}
-                            <a
+                            <Link
                                 className={styles.registerLink}
                                 href="/registration"
                             >
                                 Register here
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </>

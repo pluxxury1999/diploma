@@ -1,9 +1,14 @@
 "use client";
 
 import styles from "./forms.module.css";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { registerUser } from "@/app/api/auth";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 import Spinner from "../spinner/Spinner";
+import { getJwtFromCookie } from "@/app/utils/cookies";
 
 const RegisterForm = () => {
     const [isEmail, setIsEmail] = useState(null);
@@ -11,6 +16,12 @@ const RegisterForm = () => {
     const [isPassword, setIsPassword] = useState(null);
     const [loading, setLoading] = useState(false);
     const [register, setRegister] = useState(null);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        getJwtFromCookie() ? router.push("/home") : null;
+    }, []);
 
     const validateEmail = (email) => {
         const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -100,9 +111,9 @@ const RegisterForm = () => {
                         <div className={styles.registerBlock}>
                             <p>
                                 Already have an account ?{" "}
-                                <a className={styles.registerLink} href="/login">
+                                <Link className={styles.registerLink} href="/login">
                                     Sign in
-                                </a>
+                                </Link>
                             </p>
                         </div>
                     </>

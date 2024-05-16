@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { deleteCookie } from "@/app/utils/cookies";
+
 const registerUrl = process.env.NEXT_PUBLIC_REG_URL;
 const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL;
 const checkJwtUrl = process.env.NEXT_PUBLIC_CHECK_JWT;
@@ -43,6 +45,7 @@ const checkUserAccess = (token) => {
             },
         })
         .catch(() => {
+            deleteCookie();
             window.location.href = "/login";
         });
     return response;
