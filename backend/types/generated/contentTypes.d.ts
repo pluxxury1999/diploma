@@ -392,6 +392,29 @@ export interface ApiCheckJwtCheckJwt extends Schema.SingleType {
   };
 }
 
+export interface ApiWordWord extends Schema.CollectionType {
+  collectionName: 'words';
+  info: {
+    singularName: 'word';
+    pluralName: 'words';
+    displayName: 'word';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    word: Attribute.String;
+    translation: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::word.word', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::word.word', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -829,6 +852,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::check-jwt.check-jwt': ApiCheckJwtCheckJwt;
+      'api::word.word': ApiWordWord;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

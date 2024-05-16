@@ -5,6 +5,7 @@ const Spinner = () => {
     return (
         <>
             <Image
+                priority={true}
                 src={spinner}
                 alt="spinner"
                 width={200}
