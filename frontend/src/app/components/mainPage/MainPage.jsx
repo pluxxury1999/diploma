@@ -6,8 +6,6 @@ import BgLetter from "../bgLetter/BgLetter";
 import Link from "next/link";
 
 const MainPage = () => {
-    const randomNum = (min = 65, max = 90) =>
-        Math.floor(Math.random() * (max - min + 1) + min);
 
     // worked, but throw error in console
     // const height = window.innerHeight;

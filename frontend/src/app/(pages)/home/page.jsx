@@ -9,6 +9,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import Spinner from "@/app/components/spinner/Spinner";
+import Header from "@/app/components/header/Header";
+import Footer from "@/app/components/footer/Footer";
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
@@ -26,9 +28,13 @@ const Home = () => {
     }, []);
 
     return (
-        <main className={styles.main}>
-            {loading ? <Spinner /> : <h1>Home Page</h1>}
-        </main>
+        <>
+            <Header />
+            <main className={styles.main}>
+                {loading ? <Spinner /> : <h1>Home Page</h1>}
+            </main>
+            <Footer />
+        </>
     );
 };
 
