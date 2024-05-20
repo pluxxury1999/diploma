@@ -20,6 +20,7 @@ const LinkComponent = ({
     return gitHub ? (
         <Link
             href="https://github.com/pluxxury1999/diploma"
+            target="_blank"
         >
             <FontAwesomeIcon icon={faGithub} style={style}/>
         </Link>

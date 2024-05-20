@@ -19,7 +19,7 @@ const Home = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if (checkUserAccess(getJwtFromCookie())) {
+        if (checkUserAccess()) {
             setLoggedIn(true);
             setLoading(false);
         } else {
@@ -29,7 +29,7 @@ const Home = () => {
 
     return (
         <>
-            <Header />
+            <Header type="auth" />
             <main className={styles.main}>
                 {loading ? <Spinner /> : <h1>Home Page</h1>}
             </main>

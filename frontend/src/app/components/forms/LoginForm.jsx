@@ -29,7 +29,6 @@ const LoginForm = () => {
         setLoading(true);
         try {
             loginUser({ identifier, password }).then((res) => {
-                console.log(res.status);
                 if (res.status === 200) {
                     setJwtToCookie(res.data.jwt);
                     router.push("/home");

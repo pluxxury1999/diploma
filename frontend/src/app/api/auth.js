@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { deleteCookie } from "@/app/utils/cookies";
+import { deleteCookie, getJwtFromCookie } from "@/app/utils/cookies";
 
 const registerUrl = process.env.NEXT_PUBLIC_REG_URL;
 const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL;
@@ -37,7 +37,8 @@ const loginUser = async (data) => {
     return await response;
 };
 
-const checkUserAccess = async (token) => {
+const checkUserAccess = async () => {
+    const token = getJwtFromCookie();
     await axios
         .get(checkJwtUrl, {
             headers: {
