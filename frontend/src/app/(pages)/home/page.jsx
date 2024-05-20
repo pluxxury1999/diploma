@@ -3,7 +3,6 @@
 import styles from "./home.module.css";
 
 import { checkUserAccess } from "@/app/api/auth";
-import { getJwtFromCookie } from "@/app/utils/cookies";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -11,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Spinner from "@/app/components/spinner/Spinner";
 import Header from "@/app/components/header/Header";
 import Footer from "@/app/components/footer/Footer";
+import GamemodeCard from "@/app/components/gamemodeCard/GamemodeCard";
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
@@ -27,13 +27,15 @@ const Home = () => {
         }
     }, []);
 
-    return (loading && !loggedIn) ? (
+    return loading && !loggedIn ? (
         <Spinner />
     ) : (
         <>
             <Header type="auth" />
             <main className={styles.main}>
-                <h1>Home Page</h1>
+                <GamemodeCard />
+                <GamemodeCard />
+                <GamemodeCard />
             </main>
             <Footer />
         </>
