@@ -3,7 +3,7 @@
     display: flex;
 }
 
-.headerWrapper {
+.logoWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,4 +11,13 @@
     padding: 10px 20px;
     flex: 1;
     width: 100%;
+}
+
+.linksWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    padding: 10px 20px;
+    width: 300px;
 }

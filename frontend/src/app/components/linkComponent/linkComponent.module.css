@@ -1,0 +1,24 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+    margin: 0 10px;
+    transition: 0.3s ease;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: var(--primary-color-hover);
+}
