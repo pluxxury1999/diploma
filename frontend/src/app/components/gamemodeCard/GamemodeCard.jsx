@@ -2,20 +2,25 @@ import style from "./gamemodeCard.module.css";
 
 import LinkComponent from "../linkComponent/LinkComponent";
 
-const GamemodeCard = (props) => {
+const GamemodeCard = ({ title, description, list, url }) => {
+    const listElements = list.map((rule, index) => {
+        return <li key={index}>{rule.content}</li>;
+    });
+
     return (
         <div className={style.cardWrapper}>
-            <h1 className={style.title}>Title</h1>
-            <h1>Description</h1>
-            <h1>Rules</h1>
-            <ul>
-                <li>Rule 1</li>
-                <li>Rule 2</li>
-                <li>Rule 3</li>
-            </ul>
-            <LinkComponent url="#" title="Play" width="250"/>
+            <h1 className={style.title}>{title}</h1>
+            <div>
+                <h1>Description</h1>
+                <p>{description}</p>
+            </div>
+            <div>
+                <h1>Rules</h1>
+                <ul>{listElements}</ul>
+            </div>
+            <LinkComponent url={url} title="Play" width="250" />
         </div>
-    )
+    );
 };
 
 export default GamemodeCard;

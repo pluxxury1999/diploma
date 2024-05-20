@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gamemodes",
+  "info": {
+    "singularName": "gamemode",
+    "pluralName": "gamemodes",
+    "displayName": "gamemode",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "element.list-element"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}
