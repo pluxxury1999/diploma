@@ -30,7 +30,7 @@ const MainPage = () => {
                     }
                     duration={`${randomNum(5, 10)}s`}
                     iterationCount="infinite"
-                    rotateAngle={randomNum(0, 40)}
+                    rotateAngle={randomNum(-40, 40)}
                 />
             );
         }
