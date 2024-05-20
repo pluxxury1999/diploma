@@ -27,11 +27,13 @@ const Home = () => {
         }
     }, []);
 
-    return (
+    return (loading && !loggedIn) ? (
+        <Spinner />
+    ) : (
         <>
             <Header type="auth" />
             <main className={styles.main}>
-                {loading ? <Spinner /> : <h1>Home Page</h1>}
+                <h1>Home Page</h1>
             </main>
             <Footer />
         </>
