@@ -18,7 +18,7 @@ const GamemodeCard = ({ title, description, list, url }) => {
                 <h1>Rules</h1>
                 <ul>{listElements}</ul>
             </div>
-            <LinkComponent url={url} title="Play" width="250" />
+            <LinkComponent url={`games${url}`} title="Play" width="250" />
         </div>
     );
 };
