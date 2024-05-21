@@ -52,14 +52,18 @@ const View = ({ words }) => {
     const [incorrect, setIncorrect] = useState(0);
     const [currentWord, setCurrentWord] = useState(words[index].eng);
 
-
     const buttonEventHandler = () => {
         setIndex(index + 1);
-        if (index < words.length - 1){setCurrentWord(words[index+1].eng);}
-    }
+        if (index < words.length - 1) {
+            setCurrentWord(words[index + 1].eng);
+        }
+    };
 
     return (
         <>
+            <div className={styles.counter}>
+                {`incorrect: ${incorrect} correct: ${correct}`}
+            </div>
             <div className={styles.wordWrapper}>
                 {index <= words.length - 1 ? (
                     words[index].ua.toUpperCase()
@@ -80,7 +84,7 @@ const View = ({ words }) => {
                 >
                     <FontAwesomeIcon className={styles.icon} icon={faTimes} />
                 </button>
-                <LetterPicker currentWord={currentWord}/>
+                <LetterPicker currentWord={currentWord} />
                 <button
                     className={styles.approve}
                     disabled={index === words.length - 1}
