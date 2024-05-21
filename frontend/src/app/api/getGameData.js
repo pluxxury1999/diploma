@@ -44,7 +44,7 @@ const getRandomWords = async () => {
     const pageNum = getRandomNum(1, pageCount);
 
     const response = await axios
-        .get(wordsUrl + `${pageNum}`, config())
+        .get(wordsUrl + `${1}`, config())
         .catch((error) => {
             return {
                 status: error.response.status,
@@ -63,7 +63,8 @@ const _transformRandomWords = (data) => {
         };
     });
 
-    return shuffle(response);
+    return response;
+    // return shuffle(response);
 };
 
 export { getGamemodes, getRandomWords };

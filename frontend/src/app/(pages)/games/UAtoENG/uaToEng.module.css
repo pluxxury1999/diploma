@@ -14,3 +14,64 @@
     background-color: var(--primary-color-hover);
     cursor: pointer;
 }
+
+.controlsWrapper {
+    display: flex;
+    width: 800px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* .approve, .discard{
+    width: 70px;
+    height: 70px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+} */
+
+.approve {
+    width: 70px;
+    height: 70px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+    background-color: var(--primary-color);
+}
+
+.discard {
+    width: 70px;
+    height: 70px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+    background-color: var(--secondary-color);
+}
+
+.approve:hover {
+    cursor: pointer;
+    background-color: var(--primary-color-hover);
+}
+
+.discard:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color-hover);
+}
+
+.icon {
+    padding-top: 4px;
+    font-size: 30px;
+}
+
+.wordWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}

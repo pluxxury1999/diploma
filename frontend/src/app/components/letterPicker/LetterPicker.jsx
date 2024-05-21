@@ -1,18 +1,32 @@
 import styles from "./letterPicker.module.css";
 
-const LetterPicker = () => {
+import { useState } from "react";
+import shortid from "shortid";
+
+import { getRandomNum } from "@/app/utils/randomNum";
+import { shuffle } from "@/app/utils/arrayShuffle";
+
+const LetterPicker = ({currentWord}) => {
+
+    const letters = currentWord.split("");
+
+    const _maxLetters = 10;
+    
+    const availableLetters = letters.map((letter) => {
+        return <div key={shortid.generate()} className={styles.item}>{letter.toUpperCase()}</div>;
+    });
+
+    for (let i = 0; i < _maxLetters - letters.length; i++) {
+        const randomLetter = String.fromCharCode(getRandomNum(65, 90));
+        availableLetters.push(<div key={shortid.generate()} className={styles.item}>{randomLetter}</div>);
+    }
+
+
+    console.log(availableLetters.length);
+
     return (
-        <div class={styles.wrapper}>
-            <div class={styles.item}>A</div>
-            <div class={styles.item}>B</div>
-            <div class={styles.item}>C</div>
-            <div class={styles.item}>D</div>
-            <div class={styles.item}>E</div>
-            <div class={styles.item}>F</div>
-            <div class={styles.item}>G</div>
-            <div class={styles.item}>H</div>
-            <div class={styles.item}>I</div>
-            <div class={styles.item}>J</div>
+        <div className={styles.wrapper}>
+            {shuffle(availableLetters)}
         </div>
     );
 };
