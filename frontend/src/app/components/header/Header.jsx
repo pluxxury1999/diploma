@@ -86,6 +86,7 @@ const Logo = () => {
                 src={logo}
                 alt="Logo"
                 height={50}
+                priority={true}
             />
         </div>
     );

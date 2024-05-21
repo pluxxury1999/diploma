@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getJwtFromCookie } from "../utils/cookies";
 import { getRandomNum } from "../utils/randomNum";
+import { shuffle } from "../utils/arrayShuffle";
 
 const gamemodeUrl = process.env.NEXT_PUBLIC_GAMEMODE_URL;
 const wordsUrl = process.env.NEXT_PUBLIC_WORDS_URL;
@@ -54,13 +55,15 @@ const getRandomWords = async () => {
 };
 
 const _transformRandomWords = (data) => {
-    return data.data.map((item) => {
+    const response = data.data.map((item) => {
         return {
             id: item.id,
             ua: item.attributes.translation,
             eng: item.attributes.word,
         };
     });
+
+    return shuffle(response);
 };
 
 export { getGamemodes, getRandomWords };
