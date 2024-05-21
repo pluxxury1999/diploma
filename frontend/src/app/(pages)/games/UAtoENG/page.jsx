@@ -10,8 +10,7 @@ import { useEffect, useState } from "react";
 import { getRandomWords } from "@/app/api/getGameData";
 import LetterPicker from "@/app/components/letterPicker/LetterPicker";
 
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const UaToEng = () => {
     const [words, setWords] = useState([]);
@@ -51,6 +50,7 @@ const View = ({ words }) => {
     const [correct, setCorrect] = useState(0);
     const [incorrect, setIncorrect] = useState(0);
     const [currentWord, setCurrentWord] = useState(words[index].eng);
+    const [selected, setSelected] = useState([]);
 
     const buttonEventHandler = () => {
         setIndex(index + 1);
@@ -73,29 +73,7 @@ const View = ({ words }) => {
                     </div>
                 )}
             </div>
-            <div className={styles.controlsWrapper}>
-                <button
-                    className={styles.discard}
-                    disabled={index === words.length - 1}
-                    onClick={() => {
-                        buttonEventHandler();
-                        setIncorrect(incorrect + 1);
-                    }}
-                >
-                    <FontAwesomeIcon className={styles.icon} icon={faTimes} />
-                </button>
-                <LetterPicker currentWord={currentWord} />
-                <button
-                    className={styles.approve}
-                    disabled={index === words.length - 1}
-                    onClick={() => {
-                        buttonEventHandler();
-                        setCorrect(correct + 1);
-                    }}
-                >
-                    <FontAwesomeIcon className={styles.icon} icon={faCheck} />
-                </button>
-            </div>
+                <LetterPicker currentWord={currentWord} selectHandler={setSelected} />
         </>
     );
 };
