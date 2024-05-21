@@ -1,7 +1,17 @@
+"use client";
+
 import Header from "@/app/components/header/Header";
 import Footer from "@/app/components/footer/Footer";
+import { useEffect } from "react";
+import { getRandomWords } from "@/app/api/getGameData";
 
 const UaToEng = () => {
+    useEffect(() => {
+        getRandomWords().then((response) => {
+            console.log(response);
+        });
+    }, []);
+
     return (
         <>
             <Header />
@@ -10,7 +20,7 @@ const UaToEng = () => {
             </main>
             <Footer />
         </>
-    )
-}
+    );
+};
 
 export default UaToEng;
