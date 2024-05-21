@@ -55,7 +55,7 @@ const Home = () => {
     ) : (
         <>
             <Header type="auth" />
-            <main className={styles.main}>{gamemodes}</main>
+            <main className="main">{gamemodes}</main>
             <Footer />
         </>
     );
