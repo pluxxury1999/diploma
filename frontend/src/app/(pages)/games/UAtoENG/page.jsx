@@ -10,8 +10,6 @@ import { useEffect, useState } from "react";
 import { getRandomWords } from "@/app/api/getGameData";
 import LetterPicker from "@/app/components/letterPicker/LetterPicker";
 
-
-
 const UaToEng = () => {
     const [words, setWords] = useState([]);
     const [started, setStarted] = useState(true);
@@ -19,7 +17,6 @@ const UaToEng = () => {
     useEffect(() => {
         getRandomWords().then((response) => {
             setWords(response);
-            console.log(response);
         });
     }, []);
 
@@ -49,10 +46,35 @@ const View = ({ words }) => {
     const [index, setIndex] = useState(0);
     const [correct, setCorrect] = useState(0);
     const [incorrect, setIncorrect] = useState(0);
-    const [currentWord, setCurrentWord] = useState(words[index].eng);
-    const [selected, setSelected] = useState([]);
+    // const [currentWord, setCurrentWord] = useState(words[index].eng);
+    const [currentWord, setCurrentWord] = useState(null);
+    const [selected, setSelected] = useState(null);
 
-    const buttonEventHandler = () => {
+    useEffect(() => {
+        if (index !== words.length) {
+            setCurrentWord(words[index].eng);
+        }
+    }, [index]);
+
+    useEffect(() => {
+        if (index === words.length) {
+            return;
+        }
+
+        if (selected === words[index].eng) {
+            setCorrect(correct + 1);
+            setNextWord();
+        }
+
+        if (selected !== words[index].eng && selected !== null) {
+            setIncorrect(incorrect + 1);
+            setNextWord();
+        }
+
+        setSelected(null);
+    }, [selected]);
+
+    const setNextWord = () => {
         setIndex(index + 1);
         if (index < words.length - 1) {
             setCurrentWord(words[index + 1].eng);
@@ -73,7 +95,15 @@ const View = ({ words }) => {
                     </div>
                 )}
             </div>
-                <LetterPicker currentWord={currentWord} selectHandler={setSelected} />
+            {currentWord ? (
+                <LetterPicker
+                    currentWord={currentWord}
+                    selectHandler={setSelected}
+                    index={index}
+                />
+            ) : (
+                <Spinner />
+            )}
         </>
     );
 };

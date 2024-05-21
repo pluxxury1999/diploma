@@ -1,6 +1,6 @@
 import styles from "./letterPicker.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import shortid from "shortid";
 
 import { getRandomNum } from "@/app/utils/randomNum";
@@ -9,11 +9,12 @@ import { shuffle } from "@/app/utils/arrayShuffle";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const LetterPicker = ({ currentWord, selectHandler }) => {
+// FIX: multiply shuffles
+
+const LetterPicker = ({ currentWord, selectHandler, index }) => {
     const [choise, setChoise] = useState([]);
 
     const letters = currentWord.split("");
-
     const _maxLetters = 10;
 
     const clickHandler = (e) => {
@@ -43,16 +44,33 @@ const LetterPicker = ({ currentWord, selectHandler }) => {
                 {randomLetter}
             </div>
         );
+        if (i === _maxLetters - letters.length - 1) {
+            shuffle(availableLetters);
+            break;
+        }
     }
 
     return (
-        <div className={styles.controlsWrapper}>
-            <button className={styles.discard} onClick={() => {}}>
+        <div className={styles.controlsWrapper} style={{display: `${index === 10 ? 'none' : null}`}}>
+            <button
+                className={styles.discard}
+                onClick={() => {
+                    selectHandler("");
+                    setChoise([]);
+                }}
+            >
                 <FontAwesomeIcon className={styles.icon} icon={faTimes} />
             </button>
 
             <div className={styles.wrapper}>{shuffle(availableLetters)}</div>
-            <button className={styles.approve} onClick={() => {}}>
+
+            <button
+                className={styles.approve}
+                onClick={() => {
+                    selectHandler(choise.join("").toLowerCase());
+                    setChoise([]);
+                }}
+            >
                 <FontAwesomeIcon className={styles.icon} icon={faCheck} />
             </button>
         </div>
