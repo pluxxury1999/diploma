@@ -2,13 +2,18 @@
 
 import Header from "@/app/components/header/Header";
 import Footer from "@/app/components/footer/Footer";
-import { useEffect } from "react";
+import Spinner from "@/app/components/spinner/Spinner";
+
+import { useEffect, useState } from "react";
 import { getRandomWords } from "@/app/api/getGameData";
+import LetterPicker from "@/app/components/letterPicker/LetterPicker";
 
 const UaToEng = () => {
+    const [words, setWords] = useState([]);
+
     useEffect(() => {
         getRandomWords().then((response) => {
-            console.log(response);
+            setWords(response);
         });
     }, []);
 
@@ -16,7 +21,8 @@ const UaToEng = () => {
         <>
             <Header />
             <main>
-                <h1>UA to ENG</h1>
+                {words.length === 0 ? <Spinner /> : <p>words loaded</p>}
+                <LetterPicker />
             </main>
             <Footer />
         </>

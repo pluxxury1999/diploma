@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    justify-content: space-between; /* Распределяет элементы равномерно по строке */
+    gap: 10px; /* Задает расстояние между элементами (по желанию) */
+    width: 600px;
+    padding: 20px;
+    margin: 0 auto; /* Обеспечивает, что контейнер будет занимать всю ширину родительского элемента */
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    flex: 0 1 calc(20% - 10px); /* Задает ширину элементов с учетом отступов */
+    box-sizing: border-box; /* Учитывает padding и border в ширине и высоте элемента */
+    height: 100px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 4px var(--primary-color);
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.item:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
