@@ -1,30 +1,33 @@
-import styles from './selectedLetters.module.css';
-import { useEffect, useState } from 'react';
+import styles from "./selectedLetters.module.css";
+import { useEffect, useState } from "react";
 import shortid from "shortid";
 
-const SelectedLetters = ( props ) => {
-    const [selectedLetters, setSelectedLetters] = useState([]);
-    
-    const clickHandler = (letter) => {
-        setSelectedLetters((selectedLetters) => [...selectedLetters, letter]);
-    }
+const SelectedLetters = ({ letters, displayHandler, status }) => {
+    const [display, setDisplay] = useState([]);
 
+    useEffect(() => {
+        setDisplay(letters);
+    }, [letters]);
+
+    const items = display.map((letter) => {
+        return (
+            <div key={shortid.generate()} className={styles.item}>
+                {letter}
+            </div>
+        );
+    });
 
     return (
-        <>
-        <button onClick={() => {clickHandler("A")}}>click</button>
-        <h1>your answer</h1>
-        <div className={styles.wrapper} style={{ width: `${selectedLetters.length * 110}px`}} >
-            {selectedLetters.map((letter) => {
-                return (
-                    <div key={shortid.generate()} className={styles.item}>
-                        {letter}
-                    </div>
-                )
-            })}
+        <div className={styles.globalWrapper} style={{display: `${status === null ? null : 'none'}`}}>
+            <h1>your answer</h1>
+            <div
+                className={styles.wrapper}
+                style={{ width: `${display.length * 110}px` }}
+            >
+                {display.length > 0 ? items : null}
+            </div>
         </div>
-        </>
-    )
+    );
 };
 
 export default SelectedLetters;

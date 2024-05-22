@@ -49,6 +49,8 @@ const View = ({ words }) => {
     const [incorrect, setIncorrect] = useState(0);
     const [currentWord, setCurrentWord] = useState(null);
     const [selected, setSelected] = useState(null);
+    const [display, setDisplay] = useState([]);
+    const [gameStatus, setGameStatus] = useState(null);
 
     useEffect(() => {
         if (index !== words.length) {
@@ -58,6 +60,11 @@ const View = ({ words }) => {
 
     useEffect(() => {
         if (index === words.length) {
+            if (correct >= 7) {
+                setGameStatus(true);
+            } else {
+                setGameStatus(false);
+            }
             return;
         }
 
@@ -97,11 +104,16 @@ const View = ({ words }) => {
             </div>
             {currentWord ? (
                 <>
-                    <SelectedLetters />
+                    <SelectedLetters
+                        letters={display}
+                        displayHandler={setDisplay}
+                        status={gameStatus}
+                    />
                     <LetterPicker
                         currentWord={currentWord}
                         selectHandler={setSelected}
-                        index={index}
+                        displayHandler={setDisplay}
+                        status={gameStatus}
                     />
                 </>
             ) : (

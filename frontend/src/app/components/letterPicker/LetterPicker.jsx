@@ -9,16 +9,21 @@ import { shuffle } from "@/app/utils/arrayShuffle";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const LetterPicker = ({ currentWord, selectHandler, index }) => {
+const LetterPicker = ({ currentWord, selectHandler, displayHandler, status}) => {
     const [choise, setChoise] = useState([]);
     const [availableLetters, setAvailableLetters] = useState([]);
+
+    const clickHandler = (letter) => {
+        setChoise((choise) => [...choise, letter]);
+        displayHandler((choise) => [...choise, letter]);
+    };
 
     useEffect(() => {
         const letters = currentWord.split("");
         const _maxLetters = 10;
         let initialLetters = letters.map((letter) => (
             <div
-                onClick={(e) => setChoise((choise) => [...choise, e.target.textContent])}
+                onClick={(e) => clickHandler(e.target.textContent)}
                 key={shortid.generate()}
                 className={styles.item}
             >
@@ -30,7 +35,7 @@ const LetterPicker = ({ currentWord, selectHandler, index }) => {
             const randomLetter = String.fromCharCode(getRandomNum(65, 90));
             initialLetters.push(
                 <div
-                    onClick={(e) => setChoise((choise) => [...choise, e.target.textContent])}
+                    onClick={(e) => clickHandler(e.target.textContent)}
                     key={shortid.generate()}
                     className={styles.item}
                 >
@@ -44,7 +49,7 @@ const LetterPicker = ({ currentWord, selectHandler, index }) => {
     }, [currentWord]);
 
     return (
-        <div className={styles.controlsWrapper} style={{display: `${index === 10 ? 'none' : null}`}}>
+        <div className={styles.controlsWrapper} style={{display: `${status === null ? null : 'none'}`}}>
             <button
                 className={styles.discard}
                 onClick={() => {
