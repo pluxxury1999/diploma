@@ -10,10 +10,11 @@ import { useEffect, useState } from "react";
 import { getRandomWords } from "@/app/api/getGameData";
 import LetterPicker from "@/app/components/letterPicker/LetterPicker";
 import SelectedLetters from "@/app/components/selectedLetters/SelectedLetters";
+import GameResult from "@/app/components/gameResult/GameResult";
 
 const UaToEng = () => {
     const [words, setWords] = useState([]);
-    const [started, setStarted] = useState(true);
+    const [started, setStarted] = useState(false);
 
     useEffect(() => {
         getRandomWords().then((response) => {
@@ -52,6 +53,7 @@ const View = ({ words }) => {
     const [display, setDisplay] = useState([]);
     const [gameStatus, setGameStatus] = useState(null);
     const [reseted, setReseted] = useState(false);
+    const [mistakes, setMistakes] = useState([]);
 
     useEffect(() => {
         if (index !== words.length) {
@@ -76,6 +78,13 @@ const View = ({ words }) => {
 
         if (selected !== words[index].eng && selected !== null) {
             setIncorrect(incorrect + 1);
+            setMistakes([
+                ...mistakes,
+                {
+                    answer: selected ? selected : "no answer",
+                    correct: words[index].eng,
+                },
+            ]);
             setNextWord();
         }
 
@@ -91,16 +100,11 @@ const View = ({ words }) => {
 
     return (
         <>
-            <div className={styles.counter}>
-                {`incorrect: ${incorrect} correct: ${correct}`}
-            </div>
             <div className={styles.wordWrapper}>
                 {index <= words.length - 1 ? (
                     words[index].ua.toUpperCase()
                 ) : (
-                    <div>
-                        Correct: {correct}, Incorrect: {incorrect}
-                    </div>
+                    <GameResult gameStatus={gameStatus} mistakes={mistakes} />
                 )}
             </div>
             {currentWord ? (
