@@ -46,7 +46,6 @@ const View = ({ words }) => {
     const [index, setIndex] = useState(0);
     const [correct, setCorrect] = useState(0);
     const [incorrect, setIncorrect] = useState(0);
-    // const [currentWord, setCurrentWord] = useState(words[index].eng);
     const [currentWord, setCurrentWord] = useState(null);
     const [selected, setSelected] = useState(null);
 
