@@ -51,6 +51,7 @@ const View = ({ words }) => {
     const [selected, setSelected] = useState(null);
     const [display, setDisplay] = useState([]);
     const [gameStatus, setGameStatus] = useState(null);
+    const [reseted, setReseted] = useState(false);
 
     useEffect(() => {
         if (index !== words.length) {
@@ -107,12 +108,16 @@ const View = ({ words }) => {
                     <SelectedLetters
                         letters={display}
                         displayHandler={setDisplay}
+                        selectHandler={setSelected}
+                        resetHandler={setReseted}
                         status={gameStatus}
                     />
                     <LetterPicker
                         currentWord={currentWord}
                         selectHandler={setSelected}
                         displayHandler={setDisplay}
+                        resetHandler={setReseted}
+                        reseted={reseted}
                         status={gameStatus}
                     />
                 </>

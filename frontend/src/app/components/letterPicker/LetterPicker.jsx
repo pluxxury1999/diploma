@@ -13,6 +13,8 @@ const LetterPicker = ({
     currentWord,
     selectHandler,
     displayHandler,
+    resetHandler,
+    reseted,
     status,
 }) => {
     const [choise, setChoise] = useState([]);
@@ -23,27 +25,12 @@ const LetterPicker = ({
         displayHandler((choise) => [...choise, letter]);
     };
 
-    // const removeItem = (letter) => {
-    //     setAvailableLetters((items) => {
-    //         const letters = items.map((item) => {
-    //             return item.props.children;
-    //         });
-    //         const index = letters.indexOf(letter);
-    //         if (index !== -1) {
-    //             console.log("removing", letter);
-    //             items.splice(index, 1);
-    //         }
-    //         return items;
-    //     });
-    // };
-
     const removeItem = (letter) => {
         setAvailableLetters((items) => {
             const index = items.findIndex(
                 (item) => item.props.children === letter
             );
             if (index !== -1) {
-                console.log("removing", letter);
                 const updatedItems = [
                     ...items.slice(0, index),
                     ...items.slice(index + 1),
@@ -53,6 +40,29 @@ const LetterPicker = ({
             return items;
         });
     };
+
+    useEffect(() => {
+        let returnedLetters = [];
+        if (choise.length !== 0) {
+            returnedLetters = choise.map((letter) => {
+                return (
+                    <div
+                        onClick={(e) => {
+                            clickHandler(e.target.textContent);
+                            removeItem(e.target.textContent);
+                        }}
+                        key={shortid.generate()}
+                        className={styles.item}
+                    >
+                        {letter.toUpperCase()}
+                    </div>
+                );
+            });
+        }
+        setAvailableLetters(shuffle([...availableLetters, ...returnedLetters]));
+        setChoise([]);
+        resetHandler(false);
+    }, [reseted === true]);
 
     useEffect(() => {
         const letters = currentWord.split("");
