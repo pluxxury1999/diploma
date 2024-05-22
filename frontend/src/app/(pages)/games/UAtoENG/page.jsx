@@ -56,7 +56,7 @@ const View = ({ words }) => {
         if (index !== words.length) {
             setCurrentWord(words[index].eng);
         }
-    }, [index]);
+    }, [index, words]);
 
     useEffect(() => {
         if (index === words.length) {

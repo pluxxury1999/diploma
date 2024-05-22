@@ -9,7 +9,12 @@ import { shuffle } from "@/app/utils/arrayShuffle";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const LetterPicker = ({ currentWord, selectHandler, displayHandler, status}) => {
+const LetterPicker = ({
+    currentWord,
+    selectHandler,
+    displayHandler,
+    status,
+}) => {
     const [choise, setChoise] = useState([]);
     const [availableLetters, setAvailableLetters] = useState([]);
 
@@ -18,12 +23,46 @@ const LetterPicker = ({ currentWord, selectHandler, displayHandler, status}) => 
         displayHandler((choise) => [...choise, letter]);
     };
 
+    // const removeItem = (letter) => {
+    //     setAvailableLetters((items) => {
+    //         const letters = items.map((item) => {
+    //             return item.props.children;
+    //         });
+    //         const index = letters.indexOf(letter);
+    //         if (index !== -1) {
+    //             console.log("removing", letter);
+    //             items.splice(index, 1);
+    //         }
+    //         return items;
+    //     });
+    // };
+
+    const removeItem = (letter) => {
+        setAvailableLetters((items) => {
+            const index = items.findIndex(
+                (item) => item.props.children === letter
+            );
+            if (index !== -1) {
+                console.log("removing", letter);
+                const updatedItems = [
+                    ...items.slice(0, index),
+                    ...items.slice(index + 1),
+                ];
+                return updatedItems;
+            }
+            return items;
+        });
+    };
+
     useEffect(() => {
         const letters = currentWord.split("");
         const _maxLetters = 10;
         let initialLetters = letters.map((letter) => (
             <div
-                onClick={(e) => clickHandler(e.target.textContent)}
+                onClick={(e) => {
+                    clickHandler(e.target.textContent);
+                    removeItem(e.target.textContent);
+                }}
                 key={shortid.generate()}
                 className={styles.item}
             >
@@ -35,7 +74,10 @@ const LetterPicker = ({ currentWord, selectHandler, displayHandler, status}) => 
             const randomLetter = String.fromCharCode(getRandomNum(65, 90));
             initialLetters.push(
                 <div
-                    onClick={(e) => clickHandler(e.target.textContent)}
+                    onClick={(e) => {
+                        clickHandler(e.target.textContent);
+                        removeItem(e.target.textContent);
+                    }}
                     key={shortid.generate()}
                     className={styles.item}
                 >
@@ -45,16 +87,19 @@ const LetterPicker = ({ currentWord, selectHandler, displayHandler, status}) => 
         }
 
         setAvailableLetters(shuffle(initialLetters));
-        console.log(choise);
     }, [currentWord]);
 
     return (
-        <div className={styles.controlsWrapper} style={{display: `${status === null ? null : 'none'}`}}>
+        <div
+            className={styles.controlsWrapper}
+            style={{ display: `${status === null ? null : "none"}` }}
+        >
             <button
                 className={styles.discard}
                 onClick={() => {
                     selectHandler("");
                     setChoise([]);
+                    displayHandler([]);
                 }}
             >
                 <FontAwesomeIcon className={styles.icon} icon={faTimes} />
@@ -67,6 +112,7 @@ const LetterPicker = ({ currentWord, selectHandler, displayHandler, status}) => 
                 onClick={() => {
                     selectHandler(choise.join("").toLowerCase());
                     setChoise([]);
+                    displayHandler([]);
                 }}
             >
                 <FontAwesomeIcon className={styles.icon} icon={faCheck} />
