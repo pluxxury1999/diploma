@@ -1,0 +1,43 @@
+@keyframes widthAnimation {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    min-width: 120px;
+    padding: 0 40px;
+    height: 120px;
+    border-right: 2px solid var(--primary-color);
+    border-left: 2px solid var(--primary-color);
+    transition: width 0.5s ease-in-out;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    margin: 0 5px;
+    box-sizing: border-box;
+    min-width: 100px;
+    height: 100px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 4px var(--primary-color);
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.item:hover {
+    font-size: 40px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+}
+

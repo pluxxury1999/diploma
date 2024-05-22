@@ -9,6 +9,7 @@ import Spinner from "@/app/components/spinner/Spinner";
 import { useEffect, useState } from "react";
 import { getRandomWords } from "@/app/api/getGameData";
 import LetterPicker from "@/app/components/letterPicker/LetterPicker";
+import SelectedLetters from "@/app/components/selectedLetters/SelectedLetters";
 
 const UaToEng = () => {
     const [words, setWords] = useState([]);
@@ -95,11 +96,14 @@ const View = ({ words }) => {
                 )}
             </div>
             {currentWord ? (
-                <LetterPicker
-                    currentWord={currentWord}
-                    selectHandler={setSelected}
-                    index={index}
-                />
+                <>
+                    <SelectedLetters />
+                    <LetterPicker
+                        currentWord={currentWord}
+                        selectHandler={setSelected}
+                        index={index}
+                    />
+                </>
             ) : (
                 <Spinner />
             )}
