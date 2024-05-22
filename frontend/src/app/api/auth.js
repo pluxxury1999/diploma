@@ -1,10 +1,12 @@
 import axios from "axios";
 
 import { deleteCookie, getJwtFromCookie } from "@/app/utils/cookies";
+import { getUserData } from "./usersData";
 
 const registerUrl = process.env.NEXT_PUBLIC_REG_URL;
 const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL;
 const checkJwtUrl = process.env.NEXT_PUBLIC_CHECK_JWT;
+const statsTableUrl = process.env.NEXT_PUBLIC_STATISTIC_URL;
 
 const registerUser = async (data) => {
     const response = axios
@@ -37,6 +39,44 @@ const loginUser = async (data) => {
     return await response;
 };
 
+const createStatsTable = async () => {
+    const token = await getJwtFromCookie();
+    const userData = await getUserData();
+
+    const data = {
+        data: {
+            user: userData.data.id,
+            test: "test",
+        },
+    };
+
+    console.log(data);
+
+    console.log(userData.data.user_statistic === null);
+
+    if (userData.data.user_statistic === null) {
+        const response = await axios
+            .post(statsTableUrl, data, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+            .then((res) => {
+                console.log(res);
+                return res;
+            })
+            .catch((error) => {
+                return {
+                    status: error.response.status,
+                    message: error.message,
+                };
+            });
+
+        return response;
+    }
+};
+
 const checkUserAccess = async () => {
     const token = getJwtFromCookie();
     await axios
@@ -57,4 +97,4 @@ const checkUserAccess = async () => {
         });
 };
 
-export { registerUser, loginUser, checkUserAccess };
+export { registerUser, loginUser, checkUserAccess, createStatsTable };

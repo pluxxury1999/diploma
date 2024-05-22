@@ -33,6 +33,16 @@ export interface ElementList extends Schema.Component {
   };
 }
 
+export interface ElementStatistic extends Schema.Component {
+  collectionName: 'components_element_statistics';
+  info: {
+    displayName: 'statistic';
+  };
+  attributes: {
+    test: Attribute.String;
+  };
+}
+
 export interface ElementTitle extends Schema.Component {
   collectionName: 'components_element_titles';
   info: {
@@ -50,6 +60,7 @@ declare module '@strapi/types' {
       'element.description': ElementDescription;
       'element.list-element': ElementListElement;
       'element.list': ElementList;
+      'element.statistic': ElementStatistic;
       'element.title': ElementTitle;
     }
   }

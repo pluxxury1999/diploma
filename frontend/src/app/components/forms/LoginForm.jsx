@@ -3,7 +3,9 @@
 import styles from "./forms.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUser, checkUserAccess } from "@/app/api/auth";
+import { loginUser } from "@/app/api/auth";
+import { getUserData } from "@/app/api/usersData";
+import { createStatsTable } from "@/app/api/auth";
 
 import Link from "next/link";
 import { setJwtToCookie, getJwtFromCookie } from "@/app/utils/cookies";
@@ -18,7 +20,7 @@ const LoginForm = () => {
 
     useEffect(() => {
         getJwtFromCookie() ? router.push("/home") : null;
-    }, [])
+    }, []);
 
     const formHandler = (
         event,
@@ -31,6 +33,7 @@ const LoginForm = () => {
             loginUser({ identifier, password }).then((res) => {
                 if (res.status === 200) {
                     setJwtToCookie(res.data.jwt);
+                    createStatsTable();
                     router.push("/home");
                 } else {
                     console.log(res.message);
