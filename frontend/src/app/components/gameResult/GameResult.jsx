@@ -1,11 +1,26 @@
 import shortid from "shortid";
 import styles from "./gameResult.module.css";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { updateUserStats } from "@/app/api/setUserStats";
 
-
-const GameResult = ({ gameStatus, mistakes }) => {
-
+const GameResult = ({
+    gameStatus,
+    mistakes,
+    correct,
+    wrong,
+    correctHandler,
+    wrongHandler,
+}) => {
     const router = useRouter();
+
+    useEffect(() => {
+        updateUserStats(gameStatus, correct, wrong).then((response) => {
+            console.log(response);
+        });
+        correctHandler([]);
+        wrongHandler([]);
+    }, []);
 
     return (
         <div
@@ -16,27 +31,31 @@ const GameResult = ({ gameStatus, mistakes }) => {
                 {gameStatus ? "You win!" : "You lose!"}
             </h2>
             <div className={styles.results}>
-            <h3 className={styles.subTitle}>Mistakes:</h3>
-            <div className={styles.listHeader}>
-                <span className={styles.item}>Your answer</span>
-                <span className={styles.item}>Correct</span>
-            </div>
-            <ul>
-                {mistakes.length > 0 ? (
-                    mistakes.map((item) => (
-                        <li
-                            key={shortid.generate()}
-                            className={styles.listItem}
-                        >
-                            <span className={styles.item}>{item.answer}</span>
-                            <span className={styles.arrow}>&#8594;</span>
-                            <span className={styles.item}>{item.correct}</span>
-                        </li>
-                    ))
-                ) : (
-                    <li className={styles.listItem}>No mistakes</li>
-                )}
-            </ul>
+                <h3 className={styles.subTitle}>Mistakes:</h3>
+                <div className={styles.listHeader}>
+                    <span className={styles.item}>Your answer</span>
+                    <span className={styles.item}>Correct</span>
+                </div>
+                <ul>
+                    {mistakes.length > 0 ? (
+                        mistakes.map((item) => (
+                            <li
+                                key={shortid.generate()}
+                                className={styles.listItem}
+                            >
+                                <span className={styles.item}>
+                                    {item.answer}
+                                </span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <span className={styles.item}>
+                                    {item.correct}
+                                </span>
+                            </li>
+                        ))
+                    ) : (
+                        <li className={styles.listItem}>No mistakes</li>
+                    )}
+                </ul>
             </div>
             <div className={styles.controls}>
                 <button

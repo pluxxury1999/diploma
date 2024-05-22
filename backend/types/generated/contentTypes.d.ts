@@ -432,17 +432,66 @@ export interface ApiUserStatisticUserStatistic extends Schema.CollectionType {
     singularName: 'user-statistic';
     pluralName: 'user-statistics';
     displayName: 'userStatistic';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    test: Attribute.String;
     user: Attribute.Relation<
       'api::user-statistic.user-statistic',
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    win: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    lose: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    totalGames: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    winRate: Attribute.Decimal &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 100;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    totalCorectWords: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    totalWrongWords: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

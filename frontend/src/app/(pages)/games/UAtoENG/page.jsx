@@ -63,7 +63,7 @@ const View = ({ words }) => {
 
     useEffect(() => {
         if (index === words.length) {
-            if (correct >= 7) {
+            if (correct >= 1) {
                 setGameStatus(true);
             } else {
                 setGameStatus(false);
@@ -81,7 +81,7 @@ const View = ({ words }) => {
             setMistakes([
                 ...mistakes,
                 {
-                    answer: selected ? selected : "no answer",
+                    answer: selected ? selected : "skipped",
                     correct: words[index].eng,
                 },
             ]);
@@ -103,9 +103,14 @@ const View = ({ words }) => {
             <div className={styles.wordWrapper}>
                 {index <= words.length - 1 ? (
                     words[index].ua.toUpperCase()
-                ) : (
-                    <GameResult gameStatus={gameStatus} mistakes={mistakes} />
-                )}
+                ) : gameStatus !== null ? <GameResult
+                gameStatus={gameStatus}
+                mistakes={mistakes}
+                correct={correct}
+                wrong={incorrect}
+                correctHandler={setCorrect}
+                wrongHandler={setIncorrect}
+            /> : null}
             </div>
             {currentWord ? (
                 <>

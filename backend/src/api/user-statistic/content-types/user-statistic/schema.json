@@ -4,21 +4,51 @@
   "info": {
     "singularName": "user-statistic",
     "pluralName": "user-statistics",
-    "displayName": "userStatistic"
+    "displayName": "userStatistic",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "test": {
-      "type": "string"
-    },
     "user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "user_statistic"
+    },
+    "win": {
+      "type": "integer",
+      "default": 0,
+      "required": false,
+      "min": 0
+    },
+    "lose": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "totalGames": {
+      "default": 0,
+      "min": 0,
+      "type": "integer"
+    },
+    "winRate": {
+      "type": "decimal",
+      "min": 0,
+      "max": 100,
+      "default": 0
+    },
+    "totalCorectWords": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "totalWrongWords": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
     }
   }
 }

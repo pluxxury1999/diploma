@@ -46,13 +46,8 @@ const createStatsTable = async () => {
     const data = {
         data: {
             user: userData.data.id,
-            test: "test",
         },
     };
-
-    console.log(data);
-
-    console.log(userData.data.user_statistic === null);
 
     if (userData.data.user_statistic === null) {
         const response = await axios
