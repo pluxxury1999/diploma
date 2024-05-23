@@ -11,12 +11,14 @@ import { getRandomWords } from "@/app/api/getGameData";
 import LetterPicker from "@/app/components/letterPicker/LetterPicker";
 import SelectedLetters from "@/app/components/selectedLetters/SelectedLetters";
 import GameResult from "@/app/components/gameResult/GameResult";
+import { checkUserAccess } from "@/app/api/auth";
 
 const UaToEng = () => {
     const [words, setWords] = useState([]);
     const [started, setStarted] = useState(false);
 
     useEffect(() => {
+        checkUserAccess();
         getRandomWords().then((response) => {
             setWords(response);
         });
@@ -63,7 +65,7 @@ const View = ({ words }) => {
 
     useEffect(() => {
         if (index === words.length) {
-            if (correct >= 1) {
+            if (correct >= 8) {
                 setGameStatus(true);
             } else {
                 setGameStatus(false);

@@ -45,11 +45,11 @@ const createStatsTable = async () => {
 
     const data = {
         data: {
-            user: userData.data.id,
+            user: userData.id,
         },
     };
 
-    if (userData.data.user_statistic === null) {
+    if (userData.stats === null) {
         const response = await axios
             .post(statsTableUrl, data, {
                 headers: {
@@ -67,7 +67,6 @@ const createStatsTable = async () => {
                     message: error.message,
                 };
             });
-
         return response;
     }
 };

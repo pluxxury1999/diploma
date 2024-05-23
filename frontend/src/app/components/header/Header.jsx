@@ -5,6 +5,9 @@ import styles from "./header.module.css";
 import Image from "next/image";
 
 import LinkComponent from "../linkComponent/LinkComponent";
+import LogoutBtn from "../logoutButton/LogoutBtn";
+
+import { deleteCookie } from "@/app/utils/cookies";
 
 const Header = ({ type }) => {
     let View = null;
@@ -61,12 +64,7 @@ const Header = ({ type }) => {
                     </div>
                     <Logo />
                     <div className={styles.linksWrapper}>
-                        <LinkComponent
-                            url="./profile"
-                            title="Log out"
-                            width={90}
-                            height={40}
-                        />
+                        <LogoutBtn />
                     </div>
                 </>
             );

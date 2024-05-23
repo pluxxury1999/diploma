@@ -4,7 +4,7 @@ import spinner from "@/../public/spinner.svg";
 const Spinner = () => {
     const style = {
         width: "100%",
-        height: "100vh",
+        height: "calc(100vh - 105px)",
         display: "flex",
         alignItems: "center",
     };

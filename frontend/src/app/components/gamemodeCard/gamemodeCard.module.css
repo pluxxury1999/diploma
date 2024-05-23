@@ -42,3 +42,11 @@
 .title {
     font-size: 26px;
 }
+
+.listItem {
+    padding: 5px 0;
+}
+
+.description {
+    line-height: 1.4;
+}

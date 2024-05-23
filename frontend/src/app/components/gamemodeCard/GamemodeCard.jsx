@@ -4,7 +4,7 @@ import LinkComponent from "../linkComponent/LinkComponent";
 
 const GamemodeCard = ({ title, description, list, url }) => {
     const listElements = list.map((rule, index) => {
-        return <li key={index}>{rule.content}</li>;
+        return <li key={index} className={style.listItem}>{rule.content}</li>;
     });
 
     return (
@@ -12,7 +12,7 @@ const GamemodeCard = ({ title, description, list, url }) => {
             <h1 className={style.title}>{title}</h1>
             <div>
                 <h1>Description</h1>
-                <p>{description}</p>
+                <p className={style.description}>{description}</p>
             </div>
             <div>
                 <h1>Rules</h1>
