@@ -22,15 +22,24 @@ const Profile = () => {
         getUserData().then((res) => {
             setUserData(res);
         });
+
         setLoading(false);
     }, []);
 
+    if (userData !== null) {
+        localStorage.setItem("username", JSON.stringify(userData.username));
+    }
+
     return (
         <>
-            <Header type={"profile"}/>
+            <Header type={"profile"} />
             <main
                 className="main"
-                style={{ flexDirection: "column", justifyContent: "center", paddingBottom: "70px"}}
+                style={{
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    paddingBottom: "70px",
+                }}
             >
                 {!loading && userData !== null ? (
                     <>
@@ -98,7 +107,12 @@ const Profile = () => {
                                 />
                             </div>
                         </div>
-                        <LinkComponent url={"./home"} title={"Play!"} width={280} height={40}/>
+                        <LinkComponent
+                            url={"./home"}
+                            title={"Play!"}
+                            width={280}
+                            height={40}
+                        />
                     </>
                 ) : (
                     <Spinner />

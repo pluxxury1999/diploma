@@ -65,6 +65,12 @@ const Header = ({ type }) => {
                     </div>
                     <Logo homePage={true} />
                     <div className={styles.linksWrapper}>
+                        <LinkComponent 
+                            url="./leaderboard"
+                            title="Top 10"
+                            width={90}
+                            height={40} 
+                        />
                         <LogoutBtn />
                     </div>
                 </>

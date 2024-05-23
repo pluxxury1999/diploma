@@ -1,19 +1,36 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const ProgressBar = ({ currentValue, maxValue, title, negative = false}) => {
-
+const ProgressBar = ({
+    currentValue,
+    maxValue,
+    title,
+    width = 100,
+    negative = false,
+}) => {
     let percentage = (currentValue / maxValue) * 100;
+
+    let style = {
+        textAlign: "center",
+        marginTop: "10px",
+    };
 
     if (isNaN(percentage)) {
         percentage = 0;
+    }
+
+    if (typeof title === "number") {
+        style = {
+            textAlign: "center",
+            marginTop: "3px",
+        };
     }
 
     const sucess = `rgb(78, 187, 115)`;
     const fail = `rgb(255, 90, 95)`;
 
     return (
-        <div style={{ width: "100px" }}>
+        <div style={{ width: `${width}px`, margin: "0 auto" }}>
             <CircularProgressbar
                 value={percentage}
                 text={`${percentage.toFixed(2)}%`}
@@ -24,9 +41,7 @@ const ProgressBar = ({ currentValue, maxValue, title, negative = false}) => {
                     trailColor: "#d6d6d6",
                 })}
             />
-            <div style={{ textAlign: "center", marginTop: "10px" }}>
-                {title}
-            </div>
+            <div style={style}>{title}</div>
         </div>
     );
 };

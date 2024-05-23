@@ -15,9 +15,7 @@ const GameResult = ({
     const router = useRouter();
 
     useEffect(() => {
-        updateUserStats(gameStatus, correct, wrong).then((response) => {
-            console.log(response);
-        });
+        updateUserStats(gameStatus, correct, wrong);
         correctHandler([]);
         wrongHandler([]);
     }, []);

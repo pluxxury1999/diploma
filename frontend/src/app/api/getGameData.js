@@ -2,18 +2,10 @@ import axios from "axios";
 import { getJwtFromCookie } from "../utils/cookies";
 import { getRandomNum } from "../utils/randomNum";
 import { shuffle } from "../utils/arrayShuffle";
+import { config } from "../utils/fetchHeaders";
 
 const gamemodeUrl = process.env.NEXT_PUBLIC_GAMEMODE_URL;
 const wordsUrl = process.env.NEXT_PUBLIC_WORDS_URL;
-
-const config = () => {
-    const token = getJwtFromCookie();
-    return {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    };
-};
 
 const getGamemodes = async () => {
     const response = await axios.get(gamemodeUrl, config()).catch((error) => {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getJwtFromCookie } from "../utils/cookies";
+import { config } from "../utils/fetchHeaders";
 
 const userUrl = process.env.NEXT_PUBLIC_USER_URL;
 const statsUrl = process.env.NEXT_PUBLIC_STATISTIC_URL;
@@ -7,11 +8,7 @@ const statsUrl = process.env.NEXT_PUBLIC_STATISTIC_URL;
 const getStatsId = async () => {
     const token = await getJwtFromCookie();
     const id = await axios
-        .get(userUrl, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
+        .get(userUrl, config())
         .then((response) => {
             return response.data.user_statistic.id;
         })

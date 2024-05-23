@@ -9,7 +9,7 @@ const checkJwtUrl = process.env.NEXT_PUBLIC_CHECK_JWT;
 const statsTableUrl = process.env.NEXT_PUBLIC_STATISTIC_URL;
 
 const registerUser = async (data) => {
-    const response = axios
+    const response = await axios
         .post(registerUrl, {
             username: data.username,
             email: data.email,
@@ -21,11 +21,11 @@ const registerUser = async (data) => {
                 message: error.message,
             };
         });
-    return await response;
+    return response;
 };
 
 const loginUser = async (data) => {
-    const response = axios
+    const response = await axios
         .post(loginUrl, {
             identifier: data.identifier,
             password: data.password,
@@ -36,7 +36,7 @@ const loginUser = async (data) => {
                 message: error.message,
             };
         });
-    return await response;
+    return response;
 };
 
 const createStatsTable = async () => {

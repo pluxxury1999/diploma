@@ -4,7 +4,7 @@
     align-items: center;
     border: none;
     border-radius: 5px;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     cursor: pointer;
     margin: 0 10px;
     width: 90px;
@@ -17,5 +17,5 @@
 }
 
 .btn:hover {
-    background-color: var(--primary-color-hover);
+    background-color: var(--secondary-color-hover);
 }
