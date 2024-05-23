@@ -12,11 +12,11 @@ const EngToUa = () => {
     useEffect(() => {
         checkUserAccess();
         setLoading(false);
-    });
+    }, []);
 
     return (
         <>
-            <Header />
+            <Header type="inGame"/>
             {loading ? (
                 <Spinner />
             ) : (

@@ -5,6 +5,7 @@ import styles from "./leaderTable.module.css";
 import ProgressBar from "@/app/components/progressBar/ProgressBar";
 
 import { useEffect, useState } from "react";
+import { checkUserAccess } from "@/app/api/auth";
 
 import shortid from "shortid";
 
@@ -12,6 +13,7 @@ const LeaderTable = ({ users }) => {
     const [username, setUsername] = useState("");
 
     useEffect(() => {
+        checkUserAccess();
         setUsername(localStorage.getItem("username").slice(1, -1));
     }, []);
 

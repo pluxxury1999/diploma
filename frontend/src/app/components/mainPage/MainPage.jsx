@@ -49,7 +49,7 @@ const MainPage = () => {
                     your language skills.
                 </p>
                 <p className={styles.motivation}>
-                    Don't put off what you can do right now!
+                    Don&apos;t put off what you can do right now!
                 </p>
                 <div className={styles.btn}>
                     <Link className={styles.link} href="./registration">Start Now &#8594;</Link>

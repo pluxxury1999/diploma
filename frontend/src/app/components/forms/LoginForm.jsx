@@ -91,7 +91,7 @@ const LoginForm = () => {
                     )}
                     <div className={styles.registerBlock}>
                         <p>
-                            Don't have an account ?{" "}
+                            Don&apos;t have an account ?{" "}
                             <Link
                                 className={styles.registerLink}
                                 href="/registration"
