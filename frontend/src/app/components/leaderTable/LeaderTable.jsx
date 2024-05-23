@@ -38,7 +38,7 @@ const LeaderTable = ({ users }) => {
                         currentValue={user.stats.win}
                         maxValue={user.stats.totalGames}
                         title={user.stats.win}
-                        width={70}
+                        width={60}
                     />
                 </td>
                 <td key={shortid.generate()}>
@@ -46,7 +46,7 @@ const LeaderTable = ({ users }) => {
                         currentValue={user.stats.lose}
                         maxValue={user.stats.totalGames}
                         title={user.stats.lose}
-                        width={70}
+                        width={60}
                         negative={true}
                     />
                 </td >
@@ -62,7 +62,7 @@ const LeaderTable = ({ users }) => {
                             user.stats.totalWrongWords
                         }
                         title={user.stats.totalCorectWords}
-                        width={70}
+                        width={60}
                     />
                 </td>
                 <td key={shortid.generate()}>
@@ -73,7 +73,7 @@ const LeaderTable = ({ users }) => {
                             user.stats.totalWrongWords
                         }
                         title={user.stats.totalWrongWords}
-                        width={70}
+                        width={60}
                         negative={true}
                     />
                 </td>

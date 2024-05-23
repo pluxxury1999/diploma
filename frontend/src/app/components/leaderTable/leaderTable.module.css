@@ -16,10 +16,9 @@
 
 .table td {
     flex-direction: column;
-    height: 80px;
     text-align: center;
     margin: 0 auto;
-    padding: 8px;
+    padding: 3px;
 }
 
 .textContent {
