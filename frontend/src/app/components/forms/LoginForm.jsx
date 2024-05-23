@@ -15,6 +15,7 @@ const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const [userIdentifier, setUserIdentifier] = useState(null);
     const [userPassword, setUserPassword] = useState(null);
+    const [error, setError] = useState(false);
 
     const router = useRouter();
 
@@ -36,7 +37,7 @@ const LoginForm = () => {
                     createStatsTable();
                     router.push("/home");
                 } else {
-                    console.log(res.message);
+                    setError(true);
                 }
                 setLoading(false);
             });
@@ -44,6 +45,11 @@ const LoginForm = () => {
             console.log(error.massage);
         }
     };
+
+    const usernameValidation = userIdentifier === null && !userIdentifier ? true : false;
+    const passwordValidation = !userPassword ? true : false;
+
+    const activateButton = !usernameValidation && !passwordValidation;
 
     return (
         <section className={styles.wrapper}>
@@ -73,10 +79,16 @@ const LoginForm = () => {
                         />
                         <input
                             className={styles.input}
+                            disabled= {!activateButton}
                             type="submit"
                             value="Login"
                         />
                     </form>
+                    {!error ? null : (
+                        <div className={styles.errorBlock}>
+                            <p>Ivalid credentials</p>
+                        </div>
+                    )}
                     <div className={styles.registerBlock}>
                         <p>
                             Don't have an account ?{" "}

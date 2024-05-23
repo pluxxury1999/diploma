@@ -16,6 +16,7 @@ const RegisterForm = () => {
     const [isPassword, setIsPassword] = useState(null);
     const [loading, setLoading] = useState(false);
     const [register, setRegister] = useState(null);
+    const [error, setError] = useState(false);
 
     const router = useRouter();
 
@@ -32,7 +33,7 @@ const RegisterForm = () => {
 
     const lengthValidation = (value, length, setFunc) => {
         value.length >= length ? setFunc(value) : setFunc(false);
-    }
+    };
 
     // Обробник форми
 
@@ -45,10 +46,20 @@ const RegisterForm = () => {
         event.preventDefault();
         setLoading(true);
         registerUser({ username, email, password }).then((res) => {
-            res.status === 200 ? setRegister(true) : setRegister(false);
+            res.status === 200
+                ? setRegister(true)
+                : (setRegister(false), setError(true));
             setLoading(false);
         });
     };
+
+    const emailValidation = isEmail === null && !isEmail ? true : false;
+    const usernameValidation =
+        isUsername === null && !isUsername ? true : false;
+    const passwordValidation = !isPassword ? true : false;
+
+    const activateButton =
+        !emailValidation && !usernameValidation && !passwordValidation;
 
     return (
         <section className={styles.wrapper}>
@@ -64,7 +75,8 @@ const RegisterForm = () => {
                                 onChange={(e) => validateEmail(e.target.value)}
                                 className={styles.input}
                                 style={{
-                                    borderColor: isEmail !== false ? "#ccc" : "red",
+                                    borderColor:
+                                        isEmail !== false ? "#ccc" : "red",
                                 }}
                                 type="text"
                                 name="email"
@@ -73,7 +85,13 @@ const RegisterForm = () => {
                             />
                             <label htmlFor="username">Username</label>
                             <input
-                                onChange={(e) => lengthValidation(e.target.value, 3, setIsUsername)}
+                                onChange={(e) =>
+                                    lengthValidation(
+                                        e.target.value,
+                                        3,
+                                        setIsUsername
+                                    )
+                                }
                                 className={styles.input}
                                 style={{
                                     borderColor:
@@ -88,7 +106,13 @@ const RegisterForm = () => {
                             <p className={styles.description}>min length 3</p>
                             <label htmlFor="password">Password</label>
                             <input
-                                onChange={(e) => lengthValidation(e.target.value, 8, setIsPassword)}
+                                onChange={(e) =>
+                                    lengthValidation(
+                                        e.target.value,
+                                        8,
+                                        setIsPassword
+                                    )
+                                }
                                 className={styles.input}
                                 style={{
                                     borderColor:
@@ -102,26 +126,40 @@ const RegisterForm = () => {
                             />
                             <p className={styles.description}>min length 8</p>
                             <input
-                                disabled={!isEmail || !isUsername || !isPassword}
+                                disabled={!activateButton}
                                 className={styles.input}
                                 type="submit"
                                 value="Register now"
                             />
                         </form>
+                        {!error ? null : (
+                            <div className={styles.errorBlock}>
+                                <p>Ivalid credentials</p>
+                            </div>
+                        )}
                         <div className={styles.registerBlock}>
                             <p>
                                 Already have an account ?{" "}
-                                <Link className={styles.registerLink} href="/login">
+                                <Link
+                                    className={styles.registerLink}
+                                    href="/login"
+                                >
                                     Sign in
                                 </Link>
                             </p>
                         </div>
                     </>
                 )
-            ) : (<div className={styles.successWrapper}>
-                <p className={styles.successTitle}>Confirm your email to continue</p>
-                <p className={styles.successSubTitle}>This page may be closed</p>
-            </div>)}
+            ) : (
+                <div className={styles.successWrapper}>
+                    <p className={styles.successTitle}>
+                        Confirm your email to continue
+                    </p>
+                    <p className={styles.successSubTitle}>
+                        This page may be closed
+                    </p>
+                </div>
+            )}
         </section>
     );
 };
