@@ -26,7 +26,7 @@ const UaToEng = () => {
 
     return (
         <>
-            <Header />
+            <Header type={"inGame"}/>
             <main className="main" style={{ flexDirection: "column" }}>
                 {!started ? (
                     <button

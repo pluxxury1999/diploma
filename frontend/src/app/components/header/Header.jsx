@@ -1,3 +1,5 @@
+"use client";
+
 import logo from "@/../public/logo.svg";
 
 import styles from "./header.module.css";
@@ -7,14 +9,13 @@ import Image from "next/image";
 import LinkComponent from "../linkComponent/LinkComponent";
 import LogoutBtn from "../logoutButton/LogoutBtn";
 
-import { deleteCookie } from "@/app/utils/cookies";
+import { useRouter } from "next/navigation";
 
 const Header = ({ type }) => {
     let View = null;
 
     switch (type) {
         case "main":
-            // git + logo + sign in + sign up
             View = (
                 <>
                     <div className={styles.linksWrapper}>
@@ -44,7 +45,7 @@ const Header = ({ type }) => {
                     <div className={styles.linksWrapper}>
                         <LinkComponent gitHub={true} />
                     </div>
-                    <Logo />
+                    <Logo homePage={true} />
                     <div className={styles.linksWrapper}>
                         <LinkComponent
                             url="./profile"
@@ -62,9 +63,22 @@ const Header = ({ type }) => {
                     <div className={styles.linksWrapper}>
                         <LinkComponent gitHub={true} />
                     </div>
-                    <Logo />
+                    <Logo homePage={true} />
                     <div className={styles.linksWrapper}>
                         <LogoutBtn />
+                    </div>
+                </>
+            );
+            break;
+        case "inGame":
+            View = (
+                <>
+                    <div className={styles.linksWrapper}>
+                        <LinkComponent gitHub={true} />
+                    </div>
+                    <Logo homePage={true} />
+                    <div className={styles.linksWrapper}>
+                        
                     </div>
                 </>
             );
@@ -76,16 +90,35 @@ const Header = ({ type }) => {
     return <header className={styles.header}>{View}</header>;
 };
 
-const Logo = () => {
-    return (
+const Logo = ({ homePage = false }) => {
+    const router = useRouter();
+
+    return homePage ? (
         <div className={styles.logoWrapper}>
-            <Image
-                style={{ pointerEvents: "none" }}
-                src={logo}
-                alt="Logo"
-                height={50}
-                priority={true}
-            />
+            <div
+                onClick={() => router.push("/home")}
+                className={styles.homePage}
+            >
+                <Image
+                    style={{ pointerEvents: "none" }}
+                    src={logo}
+                    alt="Logo"
+                    height={50}
+                    priority={true}
+                />
+            </div>
+        </div>
+    ) : (
+        <div className={styles.logoWrapper}>
+            <div onClick={() => router.push("/")} className={styles.homePage}>
+                <Image
+                    style={{ pointerEvents: "none" }}
+                    src={logo}
+                    alt="Logo"
+                    height={50}
+                    priority={true}
+                />
+            </div>
         </div>
     );
 };
