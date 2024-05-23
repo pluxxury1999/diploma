@@ -58,7 +58,6 @@ const createStatsTable = async () => {
                 },
             })
             .then((res) => {
-                console.log(res);
                 return res;
             })
             .catch((error) => {
