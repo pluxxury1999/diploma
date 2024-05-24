@@ -20,7 +20,6 @@ const Leaderboard = () => {
         checkUserAccess();
         getTopUsers().then((response) => {
             setTop(response);
-            console.log(response);
         });
         setLoading(false);
     }, []);
