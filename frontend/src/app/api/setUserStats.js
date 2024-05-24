@@ -58,7 +58,9 @@ const updateUserStats = async (status, correct, wrong) => {
 
     const oldData = _transformStats(currentData.data.attributes);
 
-    const rating = calculateRating(status, correct, wrong);
+    const receivedRating = calculateRating(status, correct, wrong);
+    const totalRating = oldData.rating + receivedRating;
+
 
     const newData = {
         data: {
@@ -74,7 +76,7 @@ const updateUserStats = async (status, correct, wrong) => {
             totalCorectWords: oldData.totalCorectWords + correct,
             totalWrongWords: oldData.totalWrongWords + wrong,
             totalWords: oldData.totalWords + correct + wrong,
-            rating: oldData.rating + rating,
+            rating: totalRating > 0 ? totalRating : 1,
         },
     };
 
