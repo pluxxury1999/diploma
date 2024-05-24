@@ -25,7 +25,8 @@ const RegisterForm = () => {
     }, []);
 
     const validateEmail = (email) => {
-        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const pattern = /^(?!.*[а-яА-ЯЁё])[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         const result = pattern.test(email);
         result ? setIsEmail(email) : setIsEmail(false);
@@ -33,6 +34,13 @@ const RegisterForm = () => {
 
     const lengthValidation = (value, length, setFunc) => {
         value.length >= length ? setFunc(value) : setFunc(false);
+    };
+
+    const passwordValidation = (password) => {
+        const pattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+        const result = pattern.test(password);
+        result ? setIsPassword(password) : setIsPassword(false);
     };
 
     // Обробник форми
@@ -52,14 +60,6 @@ const RegisterForm = () => {
             setLoading(false);
         });
     };
-
-    const emailValidation = isEmail === null && !isEmail ? true : false;
-    const usernameValidation =
-        isUsername === null && !isUsername ? true : false;
-    const passwordValidation = !isPassword ? true : false;
-
-    const activateButton =
-        !emailValidation && !usernameValidation && !passwordValidation;
 
     return (
         <section className={styles.wrapper}>
@@ -107,11 +107,7 @@ const RegisterForm = () => {
                             <label htmlFor="password">Password</label>
                             <input
                                 onChange={(e) =>
-                                    lengthValidation(
-                                        e.target.value,
-                                        8,
-                                        setIsPassword
-                                    )
+                                    passwordValidation(e.target.value)
                                 }
                                 className={styles.input}
                                 style={{
@@ -126,7 +122,7 @@ const RegisterForm = () => {
                             />
                             <p className={styles.description}>min length 8</p>
                             <input
-                                disabled={!activateButton}
+                                disabled={!isEmail && !isUsername && !isPassword}
                                 className={styles.input}
                                 type="submit"
                                 value="Register now"

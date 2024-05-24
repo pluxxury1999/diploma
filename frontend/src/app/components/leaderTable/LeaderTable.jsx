@@ -15,9 +15,7 @@ const LeaderTable = ({ users }) => {
     useEffect(() => {
         checkUserAccess();
         setUsername(localStorage.getItem("username").slice(1, -1));
-    }, []);
-
-    console.log(username);
+    }, [users]);
 
     const items = users.map((user) => {
 

@@ -1,10 +1,8 @@
 import axios from "axios";
-import { getJwtFromCookie } from "../utils/cookies";
 import { config } from "../utils/fetchHeaders";
 
 const userDataUrl = process.env.NEXT_PUBLIC_USER_URL;
-const topUsersUrl = process.env.NEXT_PUBLIC_TOP_USERS_URL;
-
+const topUsersUrl = process.env.NEXT_PUBLIC_STATISTIC_URL;
 // SINGLE USER DATA
 
 const getUserData = async () => {

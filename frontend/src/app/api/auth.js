@@ -9,6 +9,7 @@ const checkJwtUrl = process.env.NEXT_PUBLIC_CHECK_JWT;
 const statsTableUrl = process.env.NEXT_PUBLIC_STATISTIC_URL;
 
 const registerUser = async (data) => {
+    console.log(data);
     const response = await axios
         .post(registerUrl, {
             username: data.username,

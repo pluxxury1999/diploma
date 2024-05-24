@@ -12,7 +12,7 @@ module.exports = createCoreRouter('api::user-statistic.user-statistic', {
             middlewares: ['api::user-statistic.populate'],
         },
         findOne: {
-            middlewares: ['api::user-statistic.populate'],
+            middlewares: ['api::user-statistic.populate-top'],
         }
     }
 });
