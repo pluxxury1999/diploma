@@ -1,8 +1,8 @@
 import shortid from "shortid";
 import styles from "./gameResult.module.css";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { updateUserStats } from "@/app/api/setUserStats";
+import { useEffect, useState } from "react";
+import { updateUserStats, calculateRating } from "@/app/api/setUserStats";
 
 const GameResult = ({
     gameStatus,
@@ -12,10 +12,12 @@ const GameResult = ({
     correctHandler,
     wrongHandler,
 }) => {
+    const [rating, setRating] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
         updateUserStats(gameStatus, correct, wrong);
+        setRating(calculateRating(gameStatus, correct, wrong));
         correctHandler([]);
         wrongHandler([]);
     }, []);
@@ -27,6 +29,9 @@ const GameResult = ({
         >
             <h2 className={styles.title}>
                 {gameStatus ? "You win!" : "You lose!"}
+            </h2>
+            <h2 className={styles.title}>
+                {rating !== null ? `Rating: ${rating}` : null}
             </h2>
             <div className={styles.results}>
                 <h3 className={styles.subTitle}>Mistakes:</h3>

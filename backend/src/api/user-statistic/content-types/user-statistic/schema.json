@@ -52,7 +52,8 @@
     },
     "rating": {
       "type": "integer",
-      "default": 500
+      "default": 500,
+      "min": 1
     },
     "totalWords": {
       "type": "integer",

@@ -24,12 +24,13 @@ const _transformUserData = (userData) => {
     if (userData.status === 401) {
         return null;
     }
+
     return {
         id: userData.data.id,
         username: userData.data.username,
         stats:
             userData.data.user_statistic === null
-                ? "No data available"
+                ? null
                 : {
                       win: userData.data.user_statistic.win,
                       lose: userData.data.user_statistic.lose,

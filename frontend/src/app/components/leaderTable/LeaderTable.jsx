@@ -18,25 +18,37 @@ const LeaderTable = ({ users }) => {
     }, [users]);
 
     const items = users.map((user, index) => {
-
-        let userStyle = {}
-
-        console.log(user);
+        let userStyle = {};
 
         if (user.username === username) {
             userStyle = {
                 // boxShadow: "0px 0px 6px 0px rgba(255, 239, 161, 0.884)",
                 borderColor: "rgba(250, 198, 120, 0.3)",
-                background: "linear-gradient(to top, rgba(250, 198, 120, 0.2), rgba(255, 239, 161, 0))"
-            }
+                background:
+                    "linear-gradient(to top, rgba(250, 198, 120, 0.2), rgba(255, 239, 161, 0))",
+            };
         }
 
         return (
-            <div key={shortid.generate()} className={styles.elemWrapper} style={userStyle}>
+            <div
+                key={shortid.generate()}
+                className={styles.elemWrapper}
+                style={userStyle}
+            >
                 <p>{`${++index}. ${user.username}`}</p>
                 <p>{user.stats.rating}</p>
-                <ProgressBar maxValue={user.stats.totalGames} currentValue={user.stats.win} width={90} title={"Winrate"}/>
-                <ProgressBar maxValue={user.stats.totalWords} currentValue={user.stats.totalCorectWords} width={90} title={"Correct"}/>
+                <ProgressBar
+                    maxValue={user.stats.totalGames}
+                    currentValue={user.stats.win}
+                    width={90}
+                    title={"Winrate"}
+                />
+                <ProgressBar
+                    maxValue={user.stats.totalWords}
+                    currentValue={user.stats.totalCorectWords}
+                    width={90}
+                    title={"Correct"}
+                />
             </div>
         );
     });

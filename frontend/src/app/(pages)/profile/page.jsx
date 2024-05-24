@@ -49,6 +49,12 @@ const Profile = () => {
                             </span>{" "}
                             statistics
                         </p>
+                        <p className={styles.title}>
+                            Rating:{" "}
+                            <span className={styles.nickname}>
+                                {userData.stats.rating}
+                            </span>
+                        </p>
                         <div className={styles.progressContainer}>
                             <div className={styles.info}>
                                 <h2 className={styles.infoTitle}>
@@ -63,12 +69,14 @@ const Profile = () => {
                                     maxValue={userData.stats.totalGames}
                                     currentValue={userData.stats.win}
                                     title={"Wins"}
+                                    width={120}
                                 />
                                 <ProgressBar
                                     maxValue={userData.stats.totalGames}
                                     currentValue={userData.stats.lose}
                                     title={"Loses"}
                                     negative={true}
+                                    width={120}
                                 />
                             </div>
                         </div>
@@ -77,32 +85,26 @@ const Profile = () => {
                                 <h2 className={styles.infoTitle}>
                                     Words statistic
                                     <p className={styles.infoDescription}>
-                                        Total Words:{" "}
-                                        {userData.stats.totalCorectWords +
-                                            userData.stats.totalWrongWords}
+                                        Total Words: {userData.stats.totalWords}
                                     </p>
                                 </h2>
                             </div>
                             <div className={styles.category}>
                                 <ProgressBar
-                                    maxValue={
-                                        userData.stats.totalCorectWords +
-                                        userData.stats.totalWrongWords
-                                    }
+                                    maxValue={userData.stats.totalWords}
                                     currentValue={
                                         userData.stats.totalCorectWords
                                     }
                                     title={"Correct"}
+                                    width={120}
                                 />
                                 <ProgressBar
-                                    maxValue={
-                                        userData.stats.totalCorectWords +
-                                        userData.stats.totalWrongWords
-                                    }
+                                    maxValue={userData.stats.totalWords}
                                     currentValue={
                                         userData.stats.totalWrongWords
                                     }
                                     title={"Wrong"}
+                                    width={120}
                                     negative={true}
                                 />
                             </div>

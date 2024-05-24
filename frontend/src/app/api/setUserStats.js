@@ -21,6 +21,25 @@ const getStatsId = async () => {
     };
 };
 
+const clampFucntion = (value, min, max) => {
+    return Math.min(Math.max(value, min), max);
+};
+
+const calculateRating = (status, correct, wrong) => {
+    let winScore= 4;
+    let loseScore= 2;
+    let rating = (correct * winScore) + (wrong * loseScore * -1);
+    
+    if (!status) { 
+        winScore = 2;
+        loseScore = 6;
+        rating = (correct * winScore) + (wrong * loseScore * -1);
+        return  clampFucntion(rating, -40, 0);
+    }
+
+    return rating;
+};
+
 const updateUserStats = async (status, correct, wrong) => {
     const { id, token } = await getStatsId();
 
@@ -39,6 +58,8 @@ const updateUserStats = async (status, correct, wrong) => {
 
     const oldData = _transformStats(currentData.data.attributes);
 
+    const rating = calculateRating(status, correct, wrong);
+
     const newData = {
         data: {
             win: status ? 1 + oldData.win : oldData.win,
@@ -52,6 +73,8 @@ const updateUserStats = async (status, correct, wrong) => {
                 : ((oldData.win / (oldData.totalGames + 1)) * 100).toFixed(2),
             totalCorectWords: oldData.totalCorectWords + correct,
             totalWrongWords: oldData.totalWrongWords + wrong,
+            totalWords: oldData.totalWords + correct + wrong,
+            rating: oldData.rating + rating,
         },
     };
 
@@ -81,7 +104,9 @@ const _transformStats = (data) => {
         winRate: data.winRate,
         totalCorectWords: data.totalCorectWords,
         totalWrongWords: data.totalWrongWords,
+        totalWords: data.totalWords,
+        rating: data.rating,
     };
 };
 
-export { getStatsId, updateUserStats };
+export { getStatsId, updateUserStats, calculateRating };

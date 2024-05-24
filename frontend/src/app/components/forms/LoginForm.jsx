@@ -31,10 +31,13 @@ const LoginForm = () => {
         event.preventDefault();
         setLoading(true);
         try {
-            loginUser({ identifier, password }).then((res) => {
+            loginUser({ identifier, password }).then(async (res) => {
                 if (res.status === 200) {
-                    setJwtToCookie(res.data.jwt);
-                    createStatsTable();
+                     setJwtToCookie(res.data.jwt);
+                     await createStatsTable().then(() => {
+                        console.log("should create table")
+                     });
+                     
                     router.push("/home");
                 } else {
                     setError(true);
