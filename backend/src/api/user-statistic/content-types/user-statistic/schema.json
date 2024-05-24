@@ -49,6 +49,15 @@
       "type": "integer",
       "default": 0,
       "min": 0
+    },
+    "rating": {
+      "type": "integer",
+      "default": 500
+    },
+    "totalWords": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
     }
   }
 }

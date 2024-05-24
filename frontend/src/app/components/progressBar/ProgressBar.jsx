@@ -4,7 +4,7 @@ import "react-circular-progressbar/dist/styles.css";
 const ProgressBar = ({
     currentValue,
     maxValue,
-    title,
+    title = null,
     width = 100,
     negative = false,
 }) => {
@@ -19,10 +19,11 @@ const ProgressBar = ({
         percentage = 0;
     }
 
-    if (typeof title === "number") {
+    if (typeof title === null) {
         style = {
             textAlign: "center",
-            marginTop: "3px",
+            marginTop: "0px",
+            paddingTop: "10px"
         };
     }
 

@@ -29,7 +29,7 @@ const _transformUserData = (userData) => {
         username: userData.data.username,
         stats:
             userData.data.user_statistic === null
-                ? null
+                ? "No data available"
                 : {
                       win: userData.data.user_statistic.win,
                       lose: userData.data.user_statistic.lose,
@@ -39,6 +39,8 @@ const _transformUserData = (userData) => {
                           userData.data.user_statistic.totalCorectWords,
                       totalWrongWords:
                           userData.data.user_statistic.totalWrongWords,
+                        totalWords: userData.data.user_statistic.totalWords,
+                        rating: userData.data.user_statistic.rating,
                   },
     };
 };
@@ -70,6 +72,8 @@ const _transformTopUsers = (topUsers) => {
                 winRate: user.attributes.winRate,
                 totalCorectWords: user.attributes.totalCorectWords,
                 totalWrongWords: user.attributes.totalWrongWords,
+                totalWords: user.attributes.totalWords,
+                rating: user.attributes.rating,
             }
         }
     });

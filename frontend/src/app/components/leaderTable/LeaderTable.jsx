@@ -17,67 +17,27 @@ const LeaderTable = ({ users }) => {
         setUsername(localStorage.getItem("username").slice(1, -1));
     }, [users]);
 
-    const items = users.map((user) => {
+    const items = users.map((user, index) => {
 
-        let userStyle = {}        
+        let userStyle = {}
+
+        console.log(user);
 
         if (user.username === username) {
             userStyle = {
-                backgroundColor: "rgb(255, 250, 225)"
+                // boxShadow: "0px 0px 6px 0px rgba(255, 239, 161, 0.884)",
+                borderColor: "rgba(250, 198, 120, 0.3)",
+                background: "linear-gradient(to top, rgba(250, 198, 120, 0.2), rgba(255, 239, 161, 0))"
             }
         }
 
         return (
-            <tr key={shortid.generate()} style={userStyle}>
-                <td key={shortid.generate()} className={styles.textContent}>{user.username}</td>
-                <td key={shortid.generate()} className={styles.textContent}>
-                    {user.stats.totalGames}
-                </td>
-                <td key={shortid.generate()}>
-                    <ProgressBar
-                        currentValue={user.stats.win}
-                        maxValue={user.stats.totalGames}
-                        title={user.stats.win}
-                        width={60}
-                    />
-                </td>
-                <td key={shortid.generate()}>
-                    <ProgressBar
-                        currentValue={user.stats.lose}
-                        maxValue={user.stats.totalGames}
-                        title={user.stats.lose}
-                        width={60}
-                        negative={true}
-                    />
-                </td >
-                <td key={shortid.generate()} className={styles.textContent}>
-                    {user.stats.totalCorectWords +
-                        user.stats.totalWrongWords}
-                </td>
-                <td key={shortid.generate()}>
-                    <ProgressBar
-                        currentValue={user.stats.totalCorectWords}
-                        maxValue={
-                            user.stats.totalCorectWords +
-                            user.stats.totalWrongWords
-                        }
-                        title={user.stats.totalCorectWords}
-                        width={60}
-                    />
-                </td>
-                <td key={shortid.generate()}>
-                    <ProgressBar
-                        currentValue={user.stats.totalWrongWords}
-                        maxValue={
-                            user.stats.totalCorectWords +
-                            user.stats.totalWrongWords
-                        }
-                        title={user.stats.totalWrongWords}
-                        width={60}
-                        negative={true}
-                    />
-                </td>
-            </tr>
+            <div key={shortid.generate()} className={styles.elemWrapper} style={userStyle}>
+                <p>{`${++index}. ${user.username}`}</p>
+                <p>{user.stats.rating}</p>
+                <ProgressBar maxValue={user.stats.totalGames} currentValue={user.stats.win} width={90} title={"Winrate"}/>
+                <ProgressBar maxValue={user.stats.totalWords} currentValue={user.stats.totalCorectWords} width={90} title={"Correct"}/>
+            </div>
         );
     });
 
@@ -87,22 +47,9 @@ const LeaderTable = ({ users }) => {
                 <h2 className={styles.tableTitle}>Leaderboard</h2>
             </>
             {users.length === 0 ? null : (
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Total games</th>
-                            <th>Win</th>
-                            <th>Lose</th>
-                            <th>Total words</th>
-                            <th>Correct</th>
-                            <th>Wrong</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {username.length === 0 ? null : items}
-                    </tbody>
-                </table>
+                <div className={styles.container}>
+                    {items.length === 0 ? null : items}
+                </div>
             )}
         </>
     );
