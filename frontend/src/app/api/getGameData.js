@@ -36,7 +36,7 @@ const getRandomWords = async () => {
     const pageNum = getRandomNum(1, pageCount);
 
     const response = await axios
-        .get(wordsUrl + `${pageNum}`, config())
+        .get(`${wordsUrl}${pageNum}`, config())
         .catch((error) => {
             return {
                 status: error.response.status,

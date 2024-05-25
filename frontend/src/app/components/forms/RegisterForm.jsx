@@ -120,7 +120,7 @@ const RegisterForm = () => {
                                 id="password"
                                 placeholder="Password"
                             />
-                            <p className={styles.description}>min length 8</p>
+                            <p className={styles.description}>1 capital, 1 number, min length 8</p>
                             <input
                                 disabled={!isEmail && !isUsername && !isPassword}
                                 className={styles.input}
