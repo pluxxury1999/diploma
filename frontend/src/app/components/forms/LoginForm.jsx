@@ -31,13 +31,10 @@ const LoginForm = () => {
         event.preventDefault();
         setLoading(true);
         try {
-            loginUser({ identifier, password }).then(async (res) => {
+            loginUser({ identifier, password }).then((res) => {
                 if (res.status === 200) {
-                     setJwtToCookie(res.data.jwt);
-                     await createStatsTable().then(() => {
-                        console.log("should create table")
-                     });
-                     
+                    setJwtToCookie(res.data.jwt);
+                    createStatsTable();
                     router.push("/home");
                 } else {
                     setError(true);
@@ -45,11 +42,12 @@ const LoginForm = () => {
                 setLoading(false);
             });
         } catch (error) {
-            return (error.massage);
+            return error.massage;
         }
     };
 
-    const usernameValidation = userIdentifier === null && !userIdentifier ? true : false;
+    const usernameValidation =
+        userIdentifier === null && !userIdentifier ? true : false;
     const passwordValidation = !userPassword ? true : false;
 
     const activateButton = !usernameValidation && !passwordValidation;
@@ -82,7 +80,7 @@ const LoginForm = () => {
                         />
                         <input
                             className={styles.input}
-                            disabled= {!activateButton}
+                            disabled={!activateButton}
                             type="submit"
                             value="Login"
                         />

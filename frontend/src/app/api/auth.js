@@ -43,9 +43,6 @@ const createStatsTable = async () => {
     const token = await getJwtFromCookie();
     const userData = await getUserData();
 
-    console.log(token)
-    console.log(userData)
-
     const data = {
         data: {
             user: userData.id,
